@@ -1,12 +1,13 @@
-function redirectToImage(url) {
+function redirectToImage() {
     if (true) { //new tab
-        window.open(url, '_blank').focus();
+        window.open(artwork_url.str, '_blank').focus();
     } else { //same tab
-        location.href = url;
+        location.href = artwork_url.str;
     }
 }
 
-async function downloadImage(imageSrc) {
+async function downloadImage() {
+    imageSrc = artwork_url.str;
     const image = await fetch(imageSrc)
     const imageBlog = await image.blob()
     const imageURL = URL.createObjectURL(imageBlog)
@@ -20,47 +21,61 @@ async function downloadImage(imageSrc) {
 }
 
 function tx(str) {
-    let button = document.createElement("button");
+    var button = document.createElement("button");
     button.appendChild(document.createTextNode(str));
     return button;
 }
 
-function createViewButton(url) {
-    let button = document.createElement("button");
+function createViewButton() {
+    var button = document.createElement("button");
     button.id = "view button";
     button.appendChild(document.createTextNode("Original"));
-    button.addEventListener("click", function () { redirectToImage(url); });
+    button.addEventListener("click", function () { redirectToImage(); });
     return button;
 }
 
-function createDownloadButton(url) {
-    let button = document.createElement("button");
+function createDownloadButton() {
+    var button = document.createElement("button");
     button.id = "download button";
     button.appendChild(document.createTextNode("Download"));
-    button.addEventListener("click", function () { downloadImage(url); });
+    button.addEventListener("click", function () { downloadImage(); });
     return button;
 }
 
 function createButtons() {
-    let rtwrk = document.body.getElementsByClassName("fullHero__artwork");
+    var rtwrk = document.body.getElementsByClassName("fullHero__artwork");
+
+    if (rtwrk.length == 1) {
+        rtwrk[0].appendChild(createViewButton());
+        rtwrk[0].appendChild(createDownloadButton());
+    }
+}
+
+function getArtworkUrl() {
+    var rtwrk = document.body.getElementsByClassName("fullHero__artwork");
 
     if (rtwrk.length == 1) {
         rtwrk[0].querySelector('span[aria-role="img"]').style;
         // const re = /^.*url\("(?<url>https:\/\/.*t500x500.(jpg|png))"\).*$/m;
 
-        artwork_url = document.querySelector('meta[property="og:image"]').content;
+        art_url = document.querySelector('meta[property="og:image"]').content;
 
-        // resl = artwork_url.match(re);
+        // resl = art_url.match(re);
         // rtwrk[0].appendChild(tx("4"));
-        // // artwork_url = result.groups.url;
+        // // art_url = result.groups.url;
         // rtwrk[0].appendChild(tx(resl));
-        artwork_url = artwork_url.replace("background-image: url(\"", "");
-        artwork_url = artwork_url.replace("\"); opacity: 1;", "");
-        artwork_url = artwork_url.replace("t500x500", "original");
-
-        rtwrk[0].appendChild(createViewButton(artwork_url));
-        rtwrk[0].appendChild(createDownloadButton(artwork_url));
+        art_url = art_url.replace("background-image: url(\"", "");
+        art_url = art_url.replace("\"); opacity: 1;", "");
+        art_url = art_url.replace("t500x500", "original");
+        return art_url;
     }
 }
 
-createButtons();
+var artwork_url = { str: "" };
+
+setInterval(function () {
+    artwork_url.str = getArtworkUrl();
+    if (!document.body.querySelector('button[id="view button"]')) {
+        createButtons();
+    }
+}, 1000);
