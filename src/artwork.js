@@ -66,6 +66,7 @@ function getArtworkUrl() {
         // // art_url = result.groups.url;
         // rtwrk[0].appendChild(tx(resl));
         art_url = art_url.replace("background-image: url(\"", "");
+        art_url = art_url.replace("\"); opacity: 0;", "");
         art_url = art_url.replace("\"); opacity: 1;", "");
         art_url = art_url.replace("t500x500", "original");
         return art_url;
@@ -79,4 +80,4 @@ setInterval(function () {
     if (!document.body.querySelector('button[id="view button"]')) {
         createButtons();
     }
-}, 1000);
+}, 200);
