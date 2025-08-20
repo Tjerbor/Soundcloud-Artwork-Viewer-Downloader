@@ -55,10 +55,11 @@ function getArtworkUrl() {
     var rtwrk = document.body.getElementsByClassName("fullHero__artwork");
 
     if (rtwrk.length == 1) {
-        rtwrk[0].querySelector('span[aria-role="img"]').style;
+        var art_url = rtwrk[0].querySelector('span[aria-role="img"]').getAttribute("style");
         // const re = /^.*url\("(?<url>https:\/\/.*t500x500.(jpg|png))"\).*$/m;
 
-        art_url = document.querySelector('meta[property="og:image"]').content;
+        // var art_url = document.querySelector('meta[property="og:image"]').content;
+        // rtwrk[0].appendChild(tx(art_url));
 
         // resl = art_url.match(re);
         // rtwrk[0].appendChild(tx("4"));
