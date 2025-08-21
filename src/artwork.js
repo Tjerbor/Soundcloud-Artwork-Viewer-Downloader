@@ -31,7 +31,17 @@ function createViewButton() {
     button.id = "view button";
     button.className = "line";
     button.style = button_style;
-    button.appendChild(document.createTextNode("Original"));
+    button.appendChild(document.createTextNode("Original "));
+
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.setAttribute("href","https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+    button.appendChild(link);
+    
+    let i = document.createElement("i");
+    i.className = "fa fa-image";
+    button.appendChild(i);
+
     button.addEventListener("click", function () { redirectToImage(); });
     return button;
 }
@@ -41,7 +51,17 @@ function createDownloadButton() {
     button.id = "download button";
     button.className = "line";
     button.style = button_style;
-    button.appendChild(document.createTextNode("Download"));
+    button.appendChild(document.createTextNode("Download "));
+
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.setAttribute("href","https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+    button.appendChild(link);
+    
+    let i = document.createElement("i");
+    i.className = "fa fa-download";
+    button.appendChild(i);
+
     button.addEventListener("click", function () { downloadImage(); });
     return button;
 }
