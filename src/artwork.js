@@ -29,6 +29,8 @@ function tx(str) {
 function createViewButton() {
     var button = document.createElement("button");
     button.id = "view button";
+    button.className = "line";
+    button.style = button_style;
     button.appendChild(document.createTextNode("Original"));
     button.addEventListener("click", function () { redirectToImage(); });
     return button;
@@ -37,6 +39,8 @@ function createViewButton() {
 function createDownloadButton() {
     var button = document.createElement("button");
     button.id = "download button";
+    button.className = "line";
+    button.style = button_style;
     button.appendChild(document.createTextNode("Download"));
     button.addEventListener("click", function () { downloadImage(); });
     return button;
@@ -46,8 +50,11 @@ function createButtons() {
     var rtwrk = document.body.getElementsByClassName("fullHero__artwork");
 
     if (rtwrk.length == 1) {
-        rtwrk[0].appendChild(createViewButton());
-        rtwrk[0].appendChild(createDownloadButton());
+        let divv = document.createElement("div");
+        divv.className = "artwork_buttons";
+        divv.appendChild(createViewButton());
+        divv.appendChild(createDownloadButton());
+        rtwrk[0].appendChild(divv);
     }
 }
 
@@ -74,6 +81,7 @@ function getArtworkUrl() {
 }
 
 var artwork_url = { str: "" };
+var button_style = "display: inline-block; *display: inline; width: 50%; text-align: center; border-radius: 100px; box-sizing: border-box; font: var(--typography-body-font);";
 
 setInterval(function () {
     artwork_url.str = getArtworkUrl();
