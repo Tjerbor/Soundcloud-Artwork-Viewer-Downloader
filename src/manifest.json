@@ -22,8 +22,11 @@
     ],
     "browser_specific_settings": {
         "gecko": {
-            "id": "@addon-example",
+            "id": "@Soundcloud_Artwork_Viewer_Downloader.tjerbor",
             "strict_min_version": "58.0"
         }
-    }
+    },
+    "permissions": [
+        "activeTab"
+    ]
 }
